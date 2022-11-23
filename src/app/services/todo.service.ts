@@ -10,4 +10,10 @@ export class TodoService {
   gettodo() {
     return this.http.get(this.url);
   }
+  addtodo(data: any) {
+    return this.http.post(this.url, data);
+  }
+  deletetodo(id: any) {
+    return this.http.delete(this.url + id + '/');
+  }
 }

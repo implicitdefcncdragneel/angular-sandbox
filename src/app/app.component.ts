@@ -8,35 +8,33 @@ import { TodoService } from './services/todo.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  title = 'cnc-sandbox';
+  list: any;
   todoValue: any;
-  constructor(private todo: TodoService) {
-    this.todo.gettodo().subscribe((data) => {
-      this.todoValue = data;
-    });
+
+  ngOnInit() {
     this.list = [];
+    this.todoValue = '';
   }
 
-  title = 'cnc-sandbox';
-  list: Todo[];
-
-  // ngOnInit() {
-  //   this.list = [];
-  //   this.todoValue = '';
-  // }
-
-  // addItem() {
-  //   if (this.todoValue !== '') {
-  //     const newItem: Todo = {
-  //       id: Date.now(),
-  //       value: this.todoValue,
-  //       isDone: false,
-  //     };
-  //     this.list.push(newItem);
-  //   }
-  //   this.todoValue = '';
-  // }
-
-  // deleteItem(id: number) {
-  //   this.list = this.list.filter((item) => item.id !== id);
-  // }
+  constructor(private todo: TodoService) {
+    this.getItem();
+  }
+  getItem() {
+    this.todo.gettodo().subscribe((data) => {
+      this.list = data;
+    });
+  }
+  addItem(data: any) {
+    if (this.todoValue !== '') {
+      data = { value: data };
+      this.todo.addtodo(data).subscribe((result) => {
+        this.list.push(result);
+      });
+    }
+    this.todoValue = '';
+  }
+  deleteItem(id: number) {
+    this.todo.deletetodo(id).subscribe(() => this.getItem());
+  }
 }

@@ -1,34 +1,3 @@
-<!-- <div style="text-align: center">
-  <img
-    src="../assets/Octocat.png"
-    alt="Angular Sandbox"
-    width="100"
-    height="100"
-  />
-  <h1 class="app-title">Todo List</h1>
-</div>
-<div class="container">
-  Generate TODO
-  <br />
-  <input
-    type="text"
-    class="input-text"
-    [(ngModel)]="todoValue"
-    (keyup.enter)="addItem()"
-    placeholder="Add A Todo"
-  />
-  <button class="add-btn" (click)="addItem()">Add Todo</button>
-  <div class="list">
-    <ul>
-      <li *ngFor="let item of list">
-        <input type="checkbox" name="isDone" [(ngModel)]="item.isDone" />
-        {{ item.value }}
-        <button class="btn" (click)="deleteItem(item.id)">Delete</button>
-      </li>
-    </ul>
-  </div>
-</div> -->
-
 <div style="text-align: center">
   <img
     src="../assets/Octocat.png"
@@ -44,14 +13,17 @@
   <input
     type="text"
     class="input-text"
-    [(ngModel)]="todoValue.value"
+    [(ngModel)]="todoValue"
+    (keyup.enter)="addItem(todoValue)"
     placeholder="Add A Todo"
   />
+  <button class="add-btn" (click)="addItem(todoValue)">Add Todo</button>
   <div class="list">
     <ul>
-      <li *ngFor="let item of todoValue">
+      <li *ngFor="let item of list">
         <input type="checkbox" name="isDone" [(ngModel)]="item.isDone" />
         {{ item.value }}
+        <button class="btn" (click)="deleteItem(item.id)">Delete</button>
       </li>
     </ul>
   </div>
